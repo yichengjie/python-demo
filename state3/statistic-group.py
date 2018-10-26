@@ -1,17 +1,20 @@
 #!usr/bin/python
 # -*- coding:utf-8 -*-
-
-from xml.etree.ElementTree import ElementTree
+# iconv -f GB2312 -t UTF-8 group2.xml > group3.xml
+# find *.xml -exec sh -c "iconv -f GBK -t UTF8 {} > {}.xml" \;
+import xml.etree.ElementTree as ET
+from xmlhelper import MyXMLHelper 
 #import xml.etree.ElementTree as ET
 #xmlname = '20180508_CA_BJS_yicj_265214_GroupImport'
-xmlname = 'group-utf8'
-path = r'C:\\Users\\yicj\\Desktop\\excel\\group\\%s.xml' % xmlname
-tree = ElementTree()
-tree.parse(path)
 
-
+filePath = r'./data/format/group2.xml' 
+# myXMLHelper = MyXMLHelper(filePath)
+# xmlstr = myXMLHelper.to_utf_8str()
+# 解析xml数据
+#groups = ET.fromstring(xmlstr)
+root = ET.parse(filePath)
+groups = root.getroot()
 #  根节点
-groups = tree.getroot()
 isCreate = groups.attrib['isCreate']
 #  group 的记录条数
 gcount = 0
