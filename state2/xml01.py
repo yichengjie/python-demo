@@ -1,6 +1,6 @@
-#import xml.etree.ElementTree as ET
-#tree = ET.parse('country_data.xml')
-import xml.sax
+import xml.etree.ElementTree as ET
+tree = ET.parse('country_data.xml')
+#import xml.sax
 
 
 tree = xml.sax.parse('country_data.xml')
