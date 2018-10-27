@@ -11,14 +11,21 @@ groups = root.getroot()
 #  根节点
 isCreate = groups.attrib['isCreate']
 #  group 的记录条数
-gcount = 0
+data = []
 for group in groups.findall('group'):
-	gcount = gcount + 1
 	carrier_code = group.attrib['carrier_code']
 	location_code = group.attrib['location_code']
 	id = group.attrib['id']
-	print('carrier_code : %s , location_code : %s , id : %s' % (carrier_code,location_code,id))
-print('group count is : %d' % gcount)		
+	groupdtls = group.findall('groupdtl')
+	data.append({'carrCode':carrier_code,'locCode':location_code,'id':id,'dtlCount':len(groupdtls)})
+	#print('carrCode : %s , locCode : %s , id : %s , dtlCount : %d' % (carrier_code,location_code,id,len(groupdtls)))
+
+#  将数据展示出来
+dc = 0	
+for item in data:
+    dc += item['dtlCount']
+print('group count is : %d , dtl count is : %d ' % (len(data) ,dc))
+    		
 
 
 
