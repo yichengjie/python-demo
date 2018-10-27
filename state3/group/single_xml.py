@@ -27,7 +27,14 @@ class GroupSingleXmlStatistic(object):
 			self.retData['list'].append(retGroupData)
 		return self.retData
 
+	def __getXmlDtlCount(self,xmlData):
+		dc = 0	
+		for item in xmlData['list']:
+		 	dc += item['dtlCount']
+		return dc
+
 	def print(self):
+
 		print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
 		     % (self.retData['filename'], self.retData['isCreate'], \
-		  	len(self.retData['list']), dc))
+		  	len(self.retData['list']), self.__getXmlDtlCount(self.retData)))

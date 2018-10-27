@@ -4,9 +4,11 @@
 # find *.xml -exec sh -c "iconv -f GBK -t UTF8 {} > {}.xml" \;
 import os
 from muti_xml import GroupMutiXmlStatistic
+from single_xml import GroupSingleXmlStatistic
+import sys
 
 #  group文件路径
-def main():
+def mainMuti():
 	#  xml文件基础路径
 	basedir = r'./data' 
 	#  groups解析类
@@ -16,8 +18,27 @@ def main():
 	#  打印解析完成的数据
 	s.print()
 
+def mainSingle():
+	filepath = r'./data/20180508_CA_BJS_yicj_265214_GroupImport.xml'
+	groupSingleXmlStatistic = GroupSingleXmlStatistic(filepath)
+	groupSingleXmlStatistic.parse()
+	groupSingleXmlStatistic.print()
+
+
+def main():
+	 args = sys.argv
+	 argLen = len(args)
+	 if argLen == 2:
+	 	s = args[1]
+	 	if s == 'single':
+	 		mainSingle()
+	 		return
+	 mainMuti()
+
 #  调用程序
-main()
+if __name__=='__main__':
+    main()
+
 
 
 
