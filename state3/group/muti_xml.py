@@ -1,7 +1,8 @@
 import os
 from single_xml import GroupSingleXmlStatistic
+from base_xml import GroupBaseXmlStatistic
 
-class GroupMutiXmlStatistic(object):
+class GroupMutiXmlStatistic(GroupBaseXmlStatistic):
 	def __init__(self, basedir):
 		self.basedir = basedir
 		self.retData = []
@@ -33,4 +34,4 @@ class GroupMutiXmlStatistic(object):
 		for data in self.retData:
 			print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
 		     % (data['filename'], data['isCreate'], \
-		  	len(data['list']), self.__getXmlDtlCount(data)))
+		  	len(data['list']), self.getXmlDtlCount(data)))
