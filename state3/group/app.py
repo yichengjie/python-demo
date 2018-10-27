@@ -10,7 +10,7 @@ def main():
 	#  xml文件基础路径
 	basedir = r'./data' 
 	#  groups解析类
-	s = GroupMutiXmlStatistic(xmldir)
+	s = GroupMutiXmlStatistic(basedir)
 	#  解析xml数据
 	s.parse()
 	#  打印解析完成的数据
