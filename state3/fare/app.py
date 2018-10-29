@@ -9,13 +9,13 @@ import xml.etree.ElementTree as ET
 
 
 
-from muti_xml import FaresMutiXmlStatistic
+from muti_xml import FareMutiXmlStatistic
 
 def main():
 	basedir = '../data/fare'
-	faresMutiXmlStatistic = FaresMutiXmlStatistic(basedir)
-	faresMutiXmlStatistic.parse()
-	faresMutiXmlStatistic.print()
+	fareMutiXmlStatistic = FareMutiXmlStatistic(basedir)
+	fareMutiXmlStatistic.parse()
+	fareMutiXmlStatistic.print()
 
 #  调用程序
 if __name__=='__main__':

@@ -1,10 +1,9 @@
 import os
 from single_xml import FareSingleXmlStatistic
 
-class FaresMutiXmlStatistic(object):
+class FareMutiXmlStatistic(object):
 	"""docstring for FareXmlStatistic"""
 	def __init__(self, basedir):
-		super(FaresMutiXmlStatistic, self).__init__()
 		self.basedir = basedir
 		self.retData = []
 

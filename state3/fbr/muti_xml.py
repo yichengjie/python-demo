@@ -1,19 +1,14 @@
 import os
-from single_xml import GroupSingleXmlStatistic
-from base_xml import GroupBaseXmlStatistic
+from single_xml import FbrSingleXmlStatistic
 
-class GroupMutiXmlStatistic(GroupBaseXmlStatistic):
+class FbrMutiXmlStatistic(object):
+	"""docstring for FareXmlStatistic"""
 	def __init__(self, basedir):
+		super(FbrMutiXmlStatistic, self).__init__()
 		self.basedir = basedir
 		self.retData = []
 
-	def __getXmlDtlCount(self,xmlData):
-		dc = 0	
-		for item in xmlData['list']:
-		 	dc += item['dtlCount']
-		return dc
-
-	def __searchXmls(self):
+	def __searchXmls(self,basedir):
 		retData = []
 		for filename in os.listdir(self.basedir):
 			extname = os.path.splitext(filename)[1]
@@ -22,16 +17,29 @@ class GroupMutiXmlStatistic(GroupBaseXmlStatistic):
 		return retData
 
 	def parse(self):
-		filenames = self.__searchXmls()
-		for filename in filenames:
-			filepath = os.path.join(self.basedir,filename)
-			groupSingleXmlStatistic = GroupSingleXmlStatistic(filepath)
-			fileData = groupSingleXmlStatistic.parse()
-			self.retData.append(fileData)
+		xmlnames = self.__searchXmls(self.basedir)
+		for xmlname in xmlnames:
+			filepath = os.path.join(self.basedir,xmlname)
+
+			fbrSingleXmlStatistic = FbrSingleXmlStatistic(filepath)
+			item = fbrSingleXmlStatistic.parse()
+
+			self.retData.append(item)
+
+	#遍历xml中所有的fbr，每个item代表一个fbr
+	def getSingleXmlDtlCount(self,item):
+		dc = 0
+		for fbr in item['list']:
+			dtlCount = fbr['dtlCount']
+			dc += dtlCount
+		return dc
+
+	#遍历xml中fbr的个数
+	def getSingleXmlFbrCount(self,item):
+		return len(item['list'])
 
 	def print(self):
-		#  将数据展示出来
-		for data in self.retData:
-			print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
-		     % (data['filename'], data['isCreate'], \
-		  	len(data['list']), self.getXmlDtlCount(data)))
+		for item in self.retData:
+			print('filename :%s, isCreate :%s, fbrCount :%d, \
+				fbrDtlCount:%d'% (item['filename'],item['isCreate'],\
+					self.getSingleXmlFbrCount(item),self.getSingleXmlDtlCount(item)))

@@ -1,35 +1,40 @@
 import xml.etree.ElementTree as ET
 import os
-from base_xml import GroupBaseXmlStatistic
 
-class GroupSingleXmlStatistic(GroupBaseXmlStatistic):
+class FbrSingleXmlStatistic(object):
 	"""docstring for ClassName"""
 	def __init__(self, filepath):
 		self.filepath = filepath
 		filename = os.path.split(filepath)[1]
-		self.retData = {'isCreate':'N',\
-			'filename':filename,'list':[]}
+		self.retData = {'filename':filename,'isCreate':'N','list':[]}
 
 	def parse(self):
 		# 解析xml数据
 		root = ET.parse(self.filepath)
-		groups = root.getroot()
+		fares = root.getroot()
 		#  根节点
-		isCreate = groups.attrib['isCreate']
+		isCreate = fares.attrib['isCreate']
 		self.retData['isCreate'] = isCreate
-		#  group 的记录条数
-		for group in groups.findall('group'):
-			carrCode = group.attrib['carrier_code']
-			locCode = group.attrib['location_code']
-			id = group.attrib['id']
-			groupdtls = group.findall('groupdtl')
-			retGroupData = {'carrCode':carrCode,\
-				'locCode':locCode,'id':id,'dtlCount':len(groupdtls)}
-			self.retData['list'].append(retGroupData)
+		fbrNodeList = fares.findall('fbr')
+		
+		for fbrNode in fbrNodeList:
+			carrCode = fbrNode.attrib['carrier_code']
+			locCode = fbrNode.attrib['location_code']
+			id = fbrNode.attrib['id']
+			dtlNodeList = fbrNode.findall('fbrdtl')
+			fbrData = {'carrCode':carrCode,'locCode':locCode,\
+			'id':id,'dtlCount':len(dtlNodeList)}
+			self.retData['list'].append(fbrData)
 		return self.retData
 
-	def print(self):
+	def __getSingleDtlCount(self):
+		dc = 0
+		for fbr in self.retData['list']:
+			dtlCount = fbr['dtlCount']
+			dc += dtlCount
+		return dc
 
-		print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
-		     % (self.retData['filename'], self.retData['isCreate'], \
-		  	len(self.retData['list']), self.getXmlDtlCount(self.retData)))
+	def print(self):
+		data = self.retData ;
+		print('filename :%s, isCreate :%s, fbrCount :%d, allDtlCount:%d' % (data['filename'],\
+			 data['isCreate'], len(data['list']),self.__getSingleDtlCount()))
