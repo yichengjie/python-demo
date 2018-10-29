@@ -22,7 +22,7 @@ sed -i "s/encoding=\"gb2312\"/encoding=\"utf-8\"/g" `grep "encoding=\"gb2312\"" 
 操作步骤
 
 1.将原始xml复制到data目录
-2.执行`python gbk2utf8 "./state3/data"`，将xml文件转化为utf8格式并保存
+2.执行`python gbk2utf8.py "./state3/data"`，将xml文件转化为utf8格式并保存
 3.执行 sed -i "s/encoding=\"gb2312\"/encoding=\"utf-8\"/g" `grep "encoding=\"gb2312\"" -rl ./state3/data` 将xml文件头文件的encoding从gb2312改为utf-8
 4.进入对应模块执行 python app.py即可统计
 
