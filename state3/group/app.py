@@ -10,7 +10,7 @@ import sys
 #  group文件路径
 def mainMuti():
 	#  xml文件基础路径
-	basedir = r'./data' 
+	basedir = r'../data/group' 
 	#  groups解析类
 	s = GroupMutiXmlStatistic(basedir)
 	#  解析xml数据
@@ -19,7 +19,7 @@ def mainMuti():
 	s.print()
 
 def mainSingle():
-	filepath = r'./data/20180508_CA_BJS_yicj_265214_GroupImport.xml'
+	filepath = r'../data/group/20180508_CA_BJS_yicj_265214_GroupImport.xml'
 	groupSingleXmlStatistic = GroupSingleXmlStatistic(filepath)
 	groupSingleXmlStatistic.parse()
 	groupSingleXmlStatistic.print()
