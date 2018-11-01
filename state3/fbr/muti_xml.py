@@ -39,7 +39,28 @@ class FbrMutiXmlStatistic(object):
 		return len(item['list'])
 
 	def print(self):
+		filecount = 0
+		createCount = 0
+		createDtlCount = 0
+		cancelCount = 0
+		cancelDtlCount = 0
+
 		for item in self.retData:
+			filecount += 1
+			if(item['isCreate'] == 'Y'):
+				createCount += self.getSingleXmlFbrCount(item)
+				createDtlCount += self.getSingleXmlDtlCount(item)
+			else:
+				otherCount += self.getSingleXmlFbrCount(item)
+				otherDtlCount += self.getSingleXmlDtlCount(item)
+
 			print('filename :%s, isCreate :%s, fbrCount :%d, \
 				fbrDtlCount:%d'% (item['filename'],item['isCreate'],\
 					self.getSingleXmlFbrCount(item),self.getSingleXmlDtlCount(item)))
+
+
+		print('FileCount : '  , filecount)
+		print('CreateCount : ' , createCount)
+		print('CreateDtlCount : ' , createDtlCount)
+		print('OtherCount : ' , otherCount)
+		print('OtherDtlCount : ' , otherDtlCount)

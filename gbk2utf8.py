@@ -15,7 +15,8 @@ DEFAULT_CONF = {
     'overwrite' : False,
     'add_BOM'   : False,
     'convert_UTF'   : False,
-    'confi_thres' : 0.8,
+    #'confi_thres' : 0.8,
+    'confi_thres' : 0.5,
 }
  
 # We have to set a minimum threshold. Only those target_encoding results returned by chartdet that are above that threshold level would be accepted.
@@ -63,9 +64,14 @@ class Convert2Utf8:
             return
  
         chr_res = chardet.detect(bytedata)
+        #print('---> chr_res : ' , chr_res)
         if chr_res['encoding'] == None or chr_res['confidence'] < DEFAULT_CONF['confi_thres']:
             log.warning("Ignoring %s, since its encoding is unable to detect.", filename)
             return
+            #20181101 yicj update ,强制将未知编码转为utf-8，可能会导致乱码，
+            #但是不印象后面的统计格式
+            # 如果编码没有找到则默认为gb18030
+            #src_enc = 'gb18030'
  
         src_enc = chr_res['encoding'].lower()
         log.debug("Scanned %s, whose encoding is %s ", filename, src_enc)

@@ -18,6 +18,10 @@ sed -i "s/jack/tom/g" test.txt
 sed -i "s/encoding=\"gb2312\"/encoding=\"utf-8\"/g" `grep "encoding=\"gb2312\"" -rl ./`
 
 
+注意事项
+1.当xml文件名称包含中文时无法使用脚本替换gb2312到utf-8
+2.文件名称中不能包含空格
+
 
 操作步骤
 
@@ -25,6 +29,8 @@ sed -i "s/encoding=\"gb2312\"/encoding=\"utf-8\"/g" `grep "encoding=\"gb2312\"" 
 2.执行`python gbk2utf8.py "./state3/data"`，将xml文件转化为utf8格式并保存
 3.执行 sed -i "s/encoding=\"gb2312\"/encoding=\"utf-8\"/g" `grep "encoding=\"gb2312\"" -rl ./state3/data` 将xml文件头文件的encoding从gb2312改为utf-8
 4.进入对应模块执行 python app.py即可统计
+
+
 
 
 

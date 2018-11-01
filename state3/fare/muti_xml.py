@@ -24,7 +24,19 @@ class FareMutiXmlStatistic(object):
 			self.retData.append(item)
 
 	def print(self):
+		filecount = 0
+		createCount = 0
+		otherCount = 0
 		for item in self.retData:
+			filecount += 1
+			if(item['isCreate'] == 'Y'):
+				createCount += item['fcount']
+			else:
+				otherCount += item['fcount']
 			print('filename :%s, isCreate:%s, refNo:%s, fcount:%d'\
 		 		% (item['filename'], item['isCreate'],\
 		 		item['refNo'],item['fcount']))
+			
+		print('FileCount : ', filecount)
+		print('CreateCount : ', createCount)
+		print('otherCount : ', otherCount)

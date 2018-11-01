@@ -1,6 +1,6 @@
 import os
 
-
+'''
 groupfilePath = r'./data/group'
 groupcnstrarr = ('代理人添加','副本群组导入模板 ','大客户代理人',\
 	'第13批9HGP政府公务分销渠道','直减','政府采购',\
@@ -17,37 +17,42 @@ farecnstr = ('舱新模板','新模版','黑屏运价','特价批量导入','普
 fbrfilepath = './data/fbr'
 fbrcnstr = ()
 #################################################################
-
-
 renameifnos=[
  {'filepath':groupfilePath,'cnstrs':groupcnstrarr},
  {'filepath':farefilepath,'cnstrs':farecnstr}
-]
+]'''
+
+filepaths = ('./state3/data/fbr','./state3/data/fare','./state3/data/group/',\
+	'./state3/data/commission/','./state3/data/interlineParas/')
+
+def dealFileName(filename):
+	infos = []
+	for c in filename:
+		if('\u4e00' <= c <= '\u9fa5'):
+			c = 'x'
+		elif(' ' == c):
+			c = ''
+		infos.append(c)
+	return ''.join(infos)
 
 
-def dealFileName(filename,cnstrarr):
-	for cn in cnstrarr:
-		filename = filename.replace(cn,'1234567')
-	return filename
-
-
-def dealFilePath(filePath,cnstrarr):
+def dealFilePath(filePath):
 	filenames = os.listdir(filePath)
 	print(len(filenames))
 	for filename in filenames:
-		newfilename = dealFileName(filename,cnstrarr)
+		newfilename = dealFileName(filename)
 		oldfile = os.path.join(filePath,filename)
 		newfile = os.path.join(filePath,newfilename)
+
 		os.rename(oldfile, newfile)
 
 
-def main(infos):
-	for info in infos:
-		filepath = info['filepath']
-		cnstrs = info['cnstrs']
-		dealFilePath(filepath,cnstrs)
+def main(filepaths):
+	for filepath in filepaths:
+		dealFilePath(filepath)
 
 
 if __name__ == '__main__':
-	main(renameifnos)
+	main(filepaths)
+	
 

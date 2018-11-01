@@ -31,7 +31,24 @@ class GroupMutiXmlStatistic(GroupBaseXmlStatistic):
 
 	def print(self):
 		#  将数据展示出来
+		filecount = 0
+		createCount = 0
+		createDtlCount = 0
+		otherCount = 0
+		otherDtlCount = 0
 		for data in self.retData:
+			filecount += 1
+			if(data['isCreate'] == 'Y'):
+				createCount += len(data['list'])
+				createDtlCount += self.getXmlDtlCount(data)
+			else:
+				otherCount += len(data['list'])
+				otherDtlCount += self.getXmlDtlCount(data)
 			print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
 		     % (data['filename'], data['isCreate'], \
-		  	len(data['list']), self.getXmlDtlCount(data)))
+		  	len(data['list']), self.getXmlDtlCount(data)))	
+		print('FileCount : '  , filecount)
+		print('CreateGroupCount : ' , createCount)
+		print('CreateDtlCount : ' , createDtlCount)
+		print('OtherGroupCount : ' , otherCount)
+		print('OtherDtlCount : ' , otherDtlCount)
