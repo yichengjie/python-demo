@@ -22,8 +22,9 @@ renameifnos=[
  {'filepath':farefilepath,'cnstrs':farecnstr}
 ]'''
 
-filepaths = ('./state3/data/fbr','./state3/data/fare','./state3/data/group/',\
-	'./state3/data/commission/','./state3/data/interlineParas/')
+#filepaths = ('./state4/data/fbr','./state4/data/fare','./state4/data/group/',\
+#	'./state4/data/commission/','./state4/data/interlineParas/')
+filepaths = ('./state4/data/commission/','./state4/data/interlineParas/')
 
 def dealFileName(filename):
 	infos = []

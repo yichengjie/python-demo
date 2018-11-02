@@ -24,6 +24,16 @@ class CommissionMutiXmlStatistic(object):
 			self.retData.append(item)
 
 	def print(self):
+		fcount = 0
+		createCount = 0
+		otherCount = 0
 		for item in self.retData:
-			print('filename :%s, isCreate:%s, ccount:%d'\
-		 		% (item['filename'], item['isCreate'],item['ccount']))
+			fcount += 1
+			if (item['isCreate'] == 'Y'):
+				createCount += item['ccount']
+			else:
+				otherCount += item['ccount']
+		print('Fcount: %d, CCount:%d, ACount:%d'\
+			 % (fcount,createCount,otherCount))
+			#print('filename :%s, isCreate:%s, ccount:%d'\
+		 	#	% (item['filename'], item['isCreate'],item['ccount']))
