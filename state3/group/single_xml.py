@@ -33,3 +33,6 @@ class GroupSingleXmlStatistic(GroupBaseXmlStatistic):
 		print('Fname:%s, isCreate: %s, GCount is : %d, DtlCount is : %d ' \
 		     % (self.retData['filename'], self.retData['isCreate'], \
 		  	len(self.retData['list']), self.getXmlDtlCount(self.retData)))
+
+
+
