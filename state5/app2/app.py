@@ -10,9 +10,11 @@ dataSet , labels = data_set.createDataSet()
 
 #print('shan : ' , shan)
 
-ret = trees.splitDataSet(dataSet,0,1)
+#ret = trees.splitDataSet(dataSet,0,1)
 
-print(ret)
+#print(ret)
+ret2 = trees.chooseBestFeatureToSplit(dataSet)
+print('ret2 ' , ret2)
 
 
 
