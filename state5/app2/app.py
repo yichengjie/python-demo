@@ -13,8 +13,12 @@ dataSet , labels = data_set.createDataSet()
 #ret = trees.splitDataSet(dataSet,0,1)
 
 #print(ret)
-ret2 = trees.chooseBestFeatureToSplit(dataSet)
-print('ret2 ' , ret2)
+#ret2 = trees.chooseBestFeatureToSplit(dataSet)
+#print('ret2 ' , ret2)
+
+ti = trees.createTree(dataSet,labels)
+
+print(ti)
 
 
 

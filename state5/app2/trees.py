@@ -66,14 +66,31 @@ def majorityCnt(classList):
 	return sortedClassCount[0][0]
 
 def createTree(dataSet,labels):
+	# 将最后一列全部提取出来
+	# ['yes', 'yes', 'no', 'no', 'no']
 	classList = [example[-1] for example in dataSet]
+	#print('classList , ' , classList)
+	#l = classList.count(classList[0])
+	#l2 = len(classList)
+	#print('len : ' , l , 'len2 : ' ,)
 	if classList.count(classList[0]) == len(classList):
 		return classList[0]
 	if len(dataSet[0]) == 1:
 		return majorityCnt(classList)
-
-	
-	pass
+	bestFeat = chooseBestFeatureToSplit(dataSet)
+	bestFeatLabel = labels[bestFeat]
+	print('bestFeatLabel : ' , bestFeatLabel)
+	myTree = {bestFeatLabel:{}}
+	del(labels[bestFeat])
+	featValues = [example[bestFeat] for example in dataSet]
+	#print('featValues : ' , featValues)
+	uniqueVals = set(featValues)
+	for value in uniqueVals:
+		subLabels = labels[:]
+		myTree[bestFeatLabel][value] = createTree(splitDataSet(\
+			dataSet,bestFeat,value),subLabels)
+	return myTree
+	#pass
 
 
 
