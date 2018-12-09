@@ -16,9 +16,9 @@ dataSet , labels = data_set.createDataSet()
 #ret2 = trees.chooseBestFeatureToSplit(dataSet)
 #print('ret2 ' , ret2)
 
-ti = trees.createTree(dataSet,labels)
 
-print(ti)
+#ti = trees.createTree(dataSet,labels)
+#print(ti)
 
 
 
